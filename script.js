@@ -6,6 +6,7 @@ const forecast_weather = document.querySelector("#forecast_weather")
     // const API = `https://api.openweathermap.org/data/2.5/weather?
     // q=${city}&appid=${API_KEY}&units=metric`
     // const IMG_URL = `https: //openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`
+
 const getCurrentWeather = async(city) => {
     weather.innerHTML = `<h2> Loading... <h2>`
     const current_weather_url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`
@@ -20,9 +21,11 @@ const getCurrentWeather = async(city) => {
     console.log('forecast finished')
     let x = 0;
     var futuredays = [];
+    var tempMinMax = [{temp_min: -100, temp_max: 100}, {temp_min: -100, temp_max: 100}, {temp_min: -100, temp_max: 100}, {temp_min: -100, temp_max: 100}, {temp_min: -100, temp_max: 100}];
     var dayVar = printDay(new Date(forecast[0].dt * 1000).getDay());
-    console.log('dayVar', printDay(dayVar))
-    
+    // var dayVar2
+    // console.log('dayVar', printDay(dayVar))
+    var z = -1;
     forecast.forEach(function (item) {
       const forecastDate = new Date(item.dt * 1000);
       const forecastMinimumTemperature = item.main.temp_min;
@@ -37,7 +40,7 @@ const getCurrentWeather = async(city) => {
             forecastIcon = forecastIcon.slice(0, 2) + "d";
         }
         // pushing values of 5 days into an array of objects
-    
+        
         futuredays.push({
             'day': printDay(forecastDate.getDay()),
             // round off the temperature to whole number using Math.round()
@@ -49,9 +52,28 @@ const getCurrentWeather = async(city) => {
             'Icon': forecastIcon
           });
         y++;    
-      }
+
+        if(dayVar != printDay(forecastDate.getDay())){
+            z++;
+            dayVar = printDay(forecastDate.getDay());
+        }
+
+    }   
+    if(z != -1 && z < 4) {
+        if(tempMinMax[z].temp_min < forecastMinimumTemperature){
+            tempMinMax[z].temp_min = forecastMinimumTemperature;
+        }
+        if(tempMinMax[z].temp_max > forecastMaximumTemperature){
+            tempMinMax[z].temp_max = forecastMaximumTemperature;
+        }
+    }   
       x++; 
     });
+    
+    for(var i = 0; i < futuredays.length-1; i++){
+        futuredays[i].temp_min = tempMinMax[i].temp_min;
+        futuredays[i].temp_max = tempMinMax[i].temp_max;
+    }
     
     return showWeather(current_weather_data, futuredays)
 }
@@ -80,8 +102,8 @@ const showWeather = async(data, futuredays) => {
                     <h3>${item.day}</h3>
                      <img src="https://openweathermap.org/img/wn/${item.Icon}@2x.png" alt="img" />
                     <div class="Temp">
-                        <h5>${item.temp_min}℃</h5>
-                        <h5>${item.temp_max}℃</h5>
+                        <h5>${Math.round(item.temp_min)}℃</h5>
+                        <h5>${Math.round(item.temp_max)}℃</h5>
                     </div>
                 </div>`
         
@@ -101,8 +123,12 @@ form.addEventListener(
     }
 )
 
-
-
+const swap = (a ,b) => {
+    let temp = a;
+    a = b;
+    b = temp;
+    return a, b;
+}
 const printDay = (dayNo) => {
     const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
     return days[dayNo].slice(0, 3); // .slice(0, 3) fuction returns the first 3 letters of the day
