@@ -12,13 +12,13 @@ const getCurrentWeather = async(city) => {
     const current_weather_url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`
     const response = await fetch(current_weather_url);
     const current_weather_data = await response.json()
-    console.log('current finished')
+//     console.log('current finished')
 
     const forecast_url = `http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API_KEY}&units=metric`;
     const forecast_response = await fetch(forecast_url);
     const data = await forecast_response.json();
     const forecast = data.list;
-    console.log('forecast finished')
+//     console.log('forecast finished')
     let x = 0;
     var futuredays = [];
     var tempMinMax = [{temp_min: -100, temp_max: 100}, {temp_min: -100, temp_max: 100}, {temp_min: -100, temp_max: 100}, {temp_min: -100, temp_max: 100}, {temp_min: -100, temp_max: 100}];
@@ -95,7 +95,7 @@ const showWeather = async(data, futuredays) => {
     
     var temp = "";
     forecast_weather.innerHTML = "";
-    console.log('futuredays', futuredays)
+//     console.log('futuredays', futuredays)
     for(item of futuredays) {
        
         temp =  `<div class="forecastDays">
@@ -109,9 +109,9 @@ const showWeather = async(data, futuredays) => {
         
         forecast_weather.innerHTML += temp; 
     }
-    futuredays.forEach(function (item) {
-        console.log(item);
-    });
+//     futuredays.forEach(function (item) {
+//         console.log(item);
+//     });
     
 }
 
