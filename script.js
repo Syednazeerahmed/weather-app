@@ -14,7 +14,7 @@ const getCurrentWeather = async(city) => {
     const current_weather_data = await response.json()
 //     console.log('current finished')
 
-    const forecast_url = `http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API_KEY}&units=metric`;
+    const forecast_url = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API_KEY}&units=metric`;
     const forecast_response = await fetch(forecast_url);
     const data = await forecast_response.json();
     const forecast = data.list;
