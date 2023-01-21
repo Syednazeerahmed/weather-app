@@ -9,7 +9,8 @@ const forecast_weather = document.querySelector("#forecast_weather")
 
 const getCurrentWeather = async(city) => {
     weather.innerHTML = `<h2> Loading... <h2>`
-    forecast_weather.innerHTML = `<h3> wait for response <h3>`
+//     forecast_weather.innerHTML = `<h3> wait for response <h3>`
+    forecast_weather.innerHTML = ``
     const current_weather_url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`
     const response = await fetch(current_weather_url);
     const current_weather_data = await response.json()
