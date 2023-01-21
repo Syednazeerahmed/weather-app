@@ -10,7 +10,7 @@ const forecast_weather = document.querySelector("#forecast_weather")
 const getCurrentWeather = async(city) => {
     weather.innerHTML = `<h2> Loading... <h2>`
 //     forecast_weather.innerHTML = `<h3> wait for response <h3>`
-//     forecast_weather.style.display = "none"
+    forecast_weather.style.display = "none"
 //     while (myDiv.firstChild) {
 //         myDiv.removeChild(myDiv.firstChild);
 //     }
@@ -98,7 +98,7 @@ const showWeather = async(data, futuredays) => {
             <h4> ${data.weather[0].main} </h4>
         </div>
     `
-    
+    forecast_weather.style.display = "flex"
     var temp = "";
     forecast_weather.innerHTML = "";
 //     console.log('futuredays', futuredays)
