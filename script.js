@@ -98,7 +98,7 @@ const showWeather = async(data, futuredays) => {
             <h4> ${data.weather[0].main} </h4>
         </div>
     `
-//     forecast_weather.style.display = "flex"
+    forecast_weather.style.display = "flex"
     var temp = "";
     forecast_weather.innerHTML = "";
 //     console.log('futuredays', futuredays)
