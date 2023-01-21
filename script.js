@@ -96,8 +96,11 @@ const showWeather = async(data, futuredays) => {
     var temp = "";
     forecast_weather.innerHTML = "";
 //     console.log('futuredays', futuredays)
+    var tempVar = 0;
     for(item of futuredays) {
-       
+        if(tempVar == 4){
+           break;
+        }
         temp =  `<div class="forecastDays">
                     <h3>${item.day}</h3>
                      <img src="https://openweathermap.org/img/wn/${item.Icon}@2x.png" alt="img" />
@@ -108,6 +111,7 @@ const showWeather = async(data, futuredays) => {
                 </div>`
         
         forecast_weather.innerHTML += temp; 
+        tempVar++;
     }
 //     futuredays.forEach(function (item) {
 //         console.log(item);
