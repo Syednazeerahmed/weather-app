@@ -122,6 +122,8 @@ const showWeather = async(data, futuredays) => {
 form.addEventListener(
     "submit",
     function(event) {
+   
+        forecast_weather.innerHTML = "";
         getCurrentWeather(search.value)
         event.preventDefault();
     }
