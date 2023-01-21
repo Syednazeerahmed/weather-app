@@ -7,14 +7,12 @@ const forecast_weather = document.querySelector("#forecast_weather")
     // q=${city}&appid=${API_KEY}&units=metric`
     // const IMG_URL = `https: //openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`
 
-const getCurrentWeather = async(city) => {
+// below function gets the current weather data and next 4 days weather forecast if the input/given city exists 
+const getCurrentWeatherAndForecast = async(city) => {
     weather.innerHTML = `<h2> Loading... <h2>`
-//     forecast_weather.innerHTML = `<h3> wait for response <h3>`
+    // below line clears the forecast_weather div after any successful search
     forecast_weather.style.display = "none"
-//     while (myDiv.firstChild) {
-//         myDiv.removeChild(myDiv.firstChild);
-//     }
-    
+
     const current_weather_url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`
     const response = await fetch(current_weather_url);
     const current_weather_data = await response.json()
@@ -65,17 +63,14 @@ const getCurrentWeather = async(city) => {
         }
 
     }   
+    // below code stores minimum and maximum temperature forecast of next 4 days 
     if(z != -1 && z < 4) {
-        if(tempMinMax[z].temp_min < forecastMinimumTemperature){
-            tempMinMax[z].temp_min = forecastMinimumTemperature;
-        }
-        if(tempMinMax[z].temp_max > forecastMaximumTemperature){
-            tempMinMax[z].temp_max = forecastMaximumTemperature;
-        }
+        tempMinMax[z].temp_min = Math.min(tempMinMax[z].temp_min, forecastMinimumTemperature); 
+        tempMinMax[z].temp_max = Math.max(tempMinMax[z].temp_max, forecastMaximumTemperature);
     }   
       x++; 
     });
-    
+    // below code stores minimum and maximum temperature from "tempMinMax" object to "futuredays" object
     for(var i = 0; i < futuredays.length-1; i++){
         futuredays[i].temp_min = tempMinMax[i].temp_min;
         futuredays[i].temp_max = tempMinMax[i].temp_max;
@@ -84,11 +79,13 @@ const getCurrentWeather = async(city) => {
     return showWeather(current_weather_data, futuredays)
 }
 
-const showWeather = async(data, futuredays) => {
+// below function displays weather info 
+const showWeather = (data, futuredays) => {
     if (data.cod == "404") {
         weather.innerHTML = `<h2> City Not Found <h2>`
         return;
     }
+    // below code displays the current weather
     weather.innerHTML = `
         <div>
             <img src="https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png" alt="">
@@ -98,10 +95,10 @@ const showWeather = async(data, futuredays) => {
             <h4> ${data.weather[0].main} </h4>
         </div>
     `
+    
+    // below code displays maximum and minimum temperature and weather of next 4 days
     forecast_weather.style.display = "flex"
     var temp = "";
-    forecast_weather.innerHTML = "";
-//     console.log('futuredays', futuredays)
     var tempVar = 0;
     for(item of futuredays) {
         if(tempVar == 4){
@@ -119,27 +116,16 @@ const showWeather = async(data, futuredays) => {
         forecast_weather.innerHTML += temp; 
         tempVar++;
     }
-//     futuredays.forEach(function (item) {
-//         console.log(item);
-//     });
-    
 }
 
 form.addEventListener(
     "submit",
-    function(event) {
-   
-        
-        getCurrentWeather(search.value)
+    function(event) {   
+        getCurrentWeatherAndForecast(search.value)
         event.preventDefault();
     }
 )
 
-const swap = (a ,b) => {
-    let temp = a;
-    a = b;
-    b = temp;
-    return a, b;
 }
 const printDay = (dayNo) => {
     const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
