@@ -126,7 +126,7 @@ form.addEventListener(
     }
 )
 
-}
+
 const printDay = (dayNo) => {
     const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
     return days[dayNo].slice(0, 3); // .slice(0, 3) fuction returns the first 3 letters of the day
