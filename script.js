@@ -97,6 +97,7 @@ const showWeather = (data, futuredays) => {
     `
     
     // below code displays maximum and minimum temperature and weather of next 4 days
+    forecast_weather.innerHTML = "";
     forecast_weather.style.display = "flex"
     var temp = "";
     var tempVar = 0;
