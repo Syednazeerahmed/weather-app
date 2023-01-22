@@ -25,7 +25,7 @@ const getCurrentWeatherAndForecast = async(city) => {
 //     console.log('forecast finished')
     let x = 0;
     var futuredays = [];
-    var tempMinMax = [{temp_min: -100, temp_max: 100}, {temp_min: -100, temp_max: 100}, {temp_min: -100, temp_max: 100}, {temp_min: -100, temp_max: 100}, {temp_min: -100, temp_max: 100}];
+    var tempMinMax = [{temp_min: 100, temp_max: -100} }];
     var dayVar = printDay(new Date(forecast[0].dt * 1000).getDay());
     // var dayVar2
     // console.log('dayVar', printDay(dayVar))
