@@ -90,14 +90,18 @@ const showWeather = (current_weather_data, futuredays) => {
             <img src="https://openweathermap.org/img/wn/${current_weather_data.weather[0].icon}@2x.png" alt="">
         </div>
         <div>
-            <h2>${current_weather_data.main.temp} ℃</h2>
-            <h4> ${current_weather_data.weather[0].main} </h4>
+            <p>${current_weather_data.main.temp}℃</p>
+            <p> ${current_weather_data.weather[0].main} </p>
         </div>
     `
     
     // below code displays maximum and minimum temperature and weather of next 4 days
     forecast_weather.innerHTML = "";
-    forecast_weather.style.display = "flex"
+    // how to display the forecast_weather div dynamically depending on screen size
+    
+    forecast_weather.style.display = "grid";
+    
+
     var temp = "";
     var tempVar = 0;
     for(item of futuredays) {
