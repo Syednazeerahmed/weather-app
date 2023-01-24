@@ -76,7 +76,7 @@ main {
    main{
       background-color: #3498db;
       display: flex;
-      justify-content: space-evenly;
+      justify-content: flex-start;
       align-items: center;
       flex-direction: column;
    }
