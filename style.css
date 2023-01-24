@@ -25,6 +25,8 @@ main {
    margin: 10px;
    font-size: 40px;
    color: white;
+   text-shadow: 2px 2px 3px rgb(0, 0, 0);
+
 }
 #weather>div:nth-child(2)>p:nth-child(1){
    font-size: 1.5em;
@@ -41,7 +43,9 @@ main {
    display: grid;
    grid-template-columns: repeat(4, 1fr);
    grid-template-rows: repeat(1, 1fr);
-   color: rgb(255, 190, 190);;
+   color: rgb(255, 190, 190);
+   text-shadow: 2px 2px 3px rgb(0, 0, 0);
+
 }
 
 .forecastDays {
