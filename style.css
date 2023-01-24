@@ -73,7 +73,7 @@ main {
 
 /* media queries */
 /*and operator for media queries */
-@media screen and (max-width: 600px) and (min-width: 300px) {
+@media screen and (max-width: 600px) and (min-width: 330px) {
    html,body {
      height: webkit-fill-available;
      overflow: hidden;
