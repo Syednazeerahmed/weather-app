@@ -71,6 +71,11 @@ main {
    box-shadow: 0px 0px 5px grey;
 }
 
+#forecast-day{
+   text-align:center;
+ }
+
+
 /* media queries */
 /*and operator for media queries */
 @media screen and (max-width: 600px) and (min-width: 330px) {
