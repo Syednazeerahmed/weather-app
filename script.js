@@ -109,7 +109,7 @@ const showWeather = (current_weather_data, futuredays) => {
            break;
         }
         temp =  `<div class="forecastDays">
-                    <h3>${item.day}</h3>
+                    <h3 id="forecast-day">${item.day}</h3>
                      <img src="https://openweathermap.org/img/wn/${item.Icon}@2x.png" alt="img" />
                     <div class="Temp">
                         <h5>${Math.round(item.temp_min)}℃</h5>
